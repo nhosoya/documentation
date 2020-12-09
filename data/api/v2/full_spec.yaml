@@ -3209,6 +3209,24 @@ components:
       type: string
       x-enum-varnames:
       - ROLES
+    SecurityMonitoringFilter:
+      description: Rule's Suppression filter
+      properties:
+        action:
+          $ref: '#/components/schemas/SecurityMonitoringFilterAction'
+        query:
+          description: Query for selecting logs to apply the filtering action
+          type: string
+      type: object
+    SecurityMonitoringFilterAction:
+      description: The type of filtering action
+      enum:
+      - require
+      - suppress
+      type: string
+      x-enum-varnames:
+      - REQUIRE
+      - SUPPRESS
     SecurityMonitoringListRulesResponse:
       description: List of rules.
       properties:
@@ -3272,6 +3290,12 @@ components:
           example: []
           items:
             $ref: '#/components/schemas/SecurityMonitoringRuleCaseCreate'
+          type: array
+        filters:
+          description: Additional queries to filter matched events before they are
+            processed
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringFilter'
           type: array
         isEnabled:
           description: Whether the rule is enabled.
@@ -3494,6 +3518,12 @@ components:
           description: User ID of the user who created the rule.
           format: int64
           type: integer
+        filters:
+          description: Additional queries to filter matched events before they are
+            processed
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringFilter'
+          type: array
         id:
           description: The ID of the rule.
           type: string
@@ -3551,6 +3581,12 @@ components:
           description: Cases for generating signals.
           items:
             $ref: '#/components/schemas/SecurityMonitoringRuleCase'
+          type: array
+        filters:
+          description: Additional queries to filter matched events before they are
+            processed
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringFilter'
           type: array
         isEnabled:
           description: Whether the rule is enabled.
