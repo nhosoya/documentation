@@ -2402,6 +2402,42 @@ api_v1:
     parent: Dashboard Lists
     url: '#update-a-dashboard-list'
     generated: true
+  - name: Dashboard Sharing
+    url: /api/v1/dashboard-sharing/
+    identifier: Dashboard Sharing
+    generated: true
+  - name: Create a public dashboard
+    parent: Dashboard Sharing
+    url: '#create-a-public-dashboard'
+    generated: true
+  - name: Revoke a public dashboard URL
+    parent: Dashboard Sharing
+    url: '#revoke-a-public-dashboard-url'
+    generated: true
+  - name: Get a public dashboard
+    parent: Dashboard Sharing
+    url: '#get-a-public-dashboard'
+    generated: true
+  - name: Update a public dashboard
+    parent: Dashboard Sharing
+    url: '#update-a-public-dashboard'
+    generated: true
+  - name: Revoke public dashboard invitations
+    parent: Dashboard Sharing
+    url: '#revoke-public-dashboard-invitations'
+    generated: true
+  - name: Get all invitations for a public dashboard
+    parent: Dashboard Sharing
+    url: '#get-all-invitations-for-a-public-dashboard'
+    generated: true
+  - name: Send public dashboard invitation email
+    parent: Dashboard Sharing
+    url: '#send-public-dashboard-invitation-email'
+    generated: true
+  - name: Request public dashboard invitation email
+    parent: Dashboard Sharing
+    url: '#request-public-dashboard-invitation-email'
+    generated: true
   - name: Dashboards
     url: /api/v1/dashboards/
     identifier: Dashboards
@@ -3275,6 +3311,10 @@ api_v2:
   - name: Update items of a dashboard list
     parent: Dashboard Lists
     url: '#update-items-of-a-dashboard-list'
+    generated: true
+  - name: Dashboard Sharing
+    url: /api/v2/dashboard-sharing/
+    identifier: Dashboard Sharing
     generated: true
   - name: Dashboards
     url: /api/v2/dashboards/

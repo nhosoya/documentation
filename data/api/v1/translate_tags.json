@@ -19,6 +19,10 @@
     "name": "Dashboard Lists",
     "description": "This endpoint is deprecated. Use the [new dashboard list endpoint](https://docs.datadoghq.com/api/v2/dashboard-lists/) instead."
   },
+  "dashboard-sharing": {
+    "name": "Dashboard Sharing",
+    "description": "Share your dashboards outside of Datadog by [generating a public URL](https://docs.datadoghq.com/dashboards/sharing/#dashboards)."
+  },
   "dashboards": {
     "name": "Dashboards",
     "description": "Interact with your dashboard lists through the API to make it easier to organize,\nfind, and share all of your dashboards with your team and organization."

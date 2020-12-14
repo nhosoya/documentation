@@ -7092,6 +7092,8 @@ tags:
 
     that you create with API v2.'
   name: Dashboard Lists
+- description: '[See API version 1](/api/v1/dashboard-sharing/).'
+  name: Dashboard Sharing
 - description: '[See API version 1](/api/v1/dashboards/).'
   name: Dashboards
 - description: '[See API version 1](/api/v1/downtimes/).'
