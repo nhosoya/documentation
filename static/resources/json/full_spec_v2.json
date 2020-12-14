@@ -157,6 +157,15 @@
           "type": "string"
         }
       },
+      "LoginMethodId": {
+        "description": "The ID of the login method",
+        "in": "path",
+        "name": "login_method_id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
       "PageNumber": {
         "description": "Specific page number to return.",
         "in": "query",
@@ -10625,6 +10634,72 @@
           "LOG"
         ]
       },
+      "LoginMethodAttributes": {
+        "description": "Attributes of a login method.",
+        "properties": {
+          "created_at": {
+            "description": "Creation date of the login method.",
+            "example": "2020-11-23T10:00:00.000Z",
+            "readOnly": true,
+            "type": "string"
+          },
+          "created_by": {
+            "description": "User who created this login method.",
+            "example": "00000000-0000-0000-0000-000000000000",
+            "readOnly": true,
+            "type": "string"
+          },
+          "login_method": {
+            "description": "A specific type of login method.",
+            "enum": [
+              "standard",
+              "google_oidc",
+              "SAML"
+            ],
+            "type": "string",
+            "x-enum-varnames": [
+              "STANDARD",
+              "GOOGLE_OIDC",
+              "SAML"
+            ]
+          }
+        },
+        "type": "object"
+      },
+      "LoginMethodCreateAttributes": {
+        "description": "Attributes used to create an org login method.",
+        "properties": {
+          "login_method": {
+            "description": "A specific type of login method.",
+            "enum": [
+              "standard",
+              "google_oidc",
+              "SAML"
+            ],
+            "type": "string",
+            "x-enum-varnames": [
+              "STANDARD",
+              "GOOGLE_OIDC",
+              "SAML"
+            ]
+          }
+        },
+        "type": "object"
+      },
+      "LoginMethodEnum": {
+        "description": "A specific type of login method.",
+        "enum": [
+          "standard",
+          "google_oidc",
+          "SAML"
+        ],
+        "type": "string",
+        "x-enum-varnames": [
+          "STANDARD",
+          "GOOGLE_OIDC",
+          "SAML"
+        ]
+      },
       "LogsAggregateBucket": {
         "description": "A bucket values",
         "properties": {
@@ -14500,6 +14575,454 @@
           }
         },
         "type": "object"
+      },
+      "OrgLoginMethod": {
+        "description": "An org login method.",
+        "properties": {
+          "attributes": {
+            "description": "Attributes of a login method.",
+            "properties": {
+              "created_at": {
+                "description": "Creation date of the login method.",
+                "example": "2020-11-23T10:00:00.000Z",
+                "readOnly": true,
+                "type": "string"
+              },
+              "created_by": {
+                "description": "User who created this login method.",
+                "example": "00000000-0000-0000-0000-000000000000",
+                "readOnly": true,
+                "type": "string"
+              },
+              "login_method": {
+                "description": "A specific type of login method.",
+                "enum": [
+                  "standard",
+                  "google_oidc",
+                  "SAML"
+                ],
+                "type": "string",
+                "x-enum-varnames": [
+                  "STANDARD",
+                  "GOOGLE_OIDC",
+                  "SAML"
+                ]
+              }
+            },
+            "type": "object"
+          },
+          "id": {
+            "description": "ID of the org login method.",
+            "type": "string"
+          },
+          "relationships": {
+            "description": "Resources related to the org login method",
+            "properties": {
+              "org": {
+                "description": "Relationship to an organization.",
+                "properties": {
+                  "data": {
+                    "description": "Relationship to organization object.",
+                    "properties": {
+                      "id": {
+                        "description": "ID of the organization.",
+                        "example": "00000000-0000-0000-0000-000000000000",
+                        "type": "string"
+                      },
+                      "type": {
+                        "default": "orgs",
+                        "description": "Organizations resource type.",
+                        "enum": [
+                          "orgs"
+                        ],
+                        "example": "orgs",
+                        "type": "string",
+                        "x-enum-varnames": [
+                          "ORGS"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "type"
+                    ],
+                    "type": "object"
+                  }
+                },
+                "required": [
+                  "data"
+                ],
+                "type": "object"
+              }
+            },
+            "type": "object"
+          },
+          "type": {
+            "default": "org_login_methods",
+            "description": "Org login methods resource type.",
+            "enum": [
+              "org_login_methods"
+            ],
+            "example": "org_login_methods",
+            "type": "string",
+            "x-enum-varnames": [
+              "ORG_LOGIN_METHODS"
+            ]
+          }
+        },
+        "type": "object"
+      },
+      "OrgLoginMethodCreateData": {
+        "description": "Object used to create an org login method.",
+        "properties": {
+          "attributes": {
+            "description": "Attributes used to create an org login method.",
+            "properties": {
+              "login_method": {
+                "description": "A specific type of login method.",
+                "enum": [
+                  "standard",
+                  "google_oidc",
+                  "SAML"
+                ],
+                "type": "string",
+                "x-enum-varnames": [
+                  "STANDARD",
+                  "GOOGLE_OIDC",
+                  "SAML"
+                ]
+              }
+            },
+            "type": "object"
+          },
+          "type": {
+            "default": "org_login_methods",
+            "description": "Org login methods resource type.",
+            "enum": [
+              "org_login_methods"
+            ],
+            "example": "org_login_methods",
+            "type": "string",
+            "x-enum-varnames": [
+              "ORG_LOGIN_METHODS"
+            ]
+          }
+        },
+        "required": [
+          "attributes",
+          "type"
+        ],
+        "type": "object"
+      },
+      "OrgLoginMethodCreateRequest": {
+        "description": "Request used to create an org login method",
+        "properties": {
+          "data": {
+            "description": "Object used to create an org login method.",
+            "properties": {
+              "attributes": {
+                "description": "Attributes used to create an org login method.",
+                "properties": {
+                  "login_method": {
+                    "description": "A specific type of login method.",
+                    "enum": [
+                      "standard",
+                      "google_oidc",
+                      "SAML"
+                    ],
+                    "type": "string",
+                    "x-enum-varnames": [
+                      "STANDARD",
+                      "GOOGLE_OIDC",
+                      "SAML"
+                    ]
+                  }
+                },
+                "type": "object"
+              },
+              "type": {
+                "default": "org_login_methods",
+                "description": "Org login methods resource type.",
+                "enum": [
+                  "org_login_methods"
+                ],
+                "example": "org_login_methods",
+                "type": "string",
+                "x-enum-varnames": [
+                  "ORG_LOGIN_METHODS"
+                ]
+              }
+            },
+            "required": [
+              "attributes",
+              "type"
+            ],
+            "type": "object"
+          }
+        },
+        "type": "object"
+      },
+      "OrgLoginMethodRelationships": {
+        "description": "Resources related to the org login method",
+        "properties": {
+          "org": {
+            "description": "Relationship to an organization.",
+            "properties": {
+              "data": {
+                "description": "Relationship to organization object.",
+                "properties": {
+                  "id": {
+                    "description": "ID of the organization.",
+                    "example": "00000000-0000-0000-0000-000000000000",
+                    "type": "string"
+                  },
+                  "type": {
+                    "default": "orgs",
+                    "description": "Organizations resource type.",
+                    "enum": [
+                      "orgs"
+                    ],
+                    "example": "orgs",
+                    "type": "string",
+                    "x-enum-varnames": [
+                      "ORGS"
+                    ]
+                  }
+                },
+                "required": [
+                  "id",
+                  "type"
+                ],
+                "type": "object"
+              }
+            },
+            "required": [
+              "data"
+            ],
+            "type": "object"
+          }
+        },
+        "type": "object"
+      },
+      "OrgLoginMethodResponse": {
+        "description": "Response for retrieving an org login method.",
+        "properties": {
+          "data": {
+            "description": "An org login method.",
+            "properties": {
+              "attributes": {
+                "description": "Attributes of a login method.",
+                "properties": {
+                  "created_at": {
+                    "description": "Creation date of the login method.",
+                    "example": "2020-11-23T10:00:00.000Z",
+                    "readOnly": true,
+                    "type": "string"
+                  },
+                  "created_by": {
+                    "description": "User who created this login method.",
+                    "example": "00000000-0000-0000-0000-000000000000",
+                    "readOnly": true,
+                    "type": "string"
+                  },
+                  "login_method": {
+                    "description": "A specific type of login method.",
+                    "enum": [
+                      "standard",
+                      "google_oidc",
+                      "SAML"
+                    ],
+                    "type": "string",
+                    "x-enum-varnames": [
+                      "STANDARD",
+                      "GOOGLE_OIDC",
+                      "SAML"
+                    ]
+                  }
+                },
+                "type": "object"
+              },
+              "id": {
+                "description": "ID of the org login method.",
+                "type": "string"
+              },
+              "relationships": {
+                "description": "Resources related to the org login method",
+                "properties": {
+                  "org": {
+                    "description": "Relationship to an organization.",
+                    "properties": {
+                      "data": {
+                        "description": "Relationship to organization object.",
+                        "properties": {
+                          "id": {
+                            "description": "ID of the organization.",
+                            "example": "00000000-0000-0000-0000-000000000000",
+                            "type": "string"
+                          },
+                          "type": {
+                            "default": "orgs",
+                            "description": "Organizations resource type.",
+                            "enum": [
+                              "orgs"
+                            ],
+                            "example": "orgs",
+                            "type": "string",
+                            "x-enum-varnames": [
+                              "ORGS"
+                            ]
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "type"
+                        ],
+                        "type": "object"
+                      }
+                    },
+                    "required": [
+                      "data"
+                    ],
+                    "type": "object"
+                  }
+                },
+                "type": "object"
+              },
+              "type": {
+                "default": "org_login_methods",
+                "description": "Org login methods resource type.",
+                "enum": [
+                  "org_login_methods"
+                ],
+                "example": "org_login_methods",
+                "type": "string",
+                "x-enum-varnames": [
+                  "ORG_LOGIN_METHODS"
+                ]
+              }
+            },
+            "type": "object"
+          }
+        },
+        "type": "object"
+      },
+      "OrgLoginMethodsResponse": {
+        "description": "Response for a list of org login methods.",
+        "properties": {
+          "data": {
+            "description": "Array of org login methods.",
+            "items": {
+              "description": "An org login method.",
+              "properties": {
+                "attributes": {
+                  "description": "Attributes of a login method.",
+                  "properties": {
+                    "created_at": {
+                      "description": "Creation date of the login method.",
+                      "example": "2020-11-23T10:00:00.000Z",
+                      "readOnly": true,
+                      "type": "string"
+                    },
+                    "created_by": {
+                      "description": "User who created this login method.",
+                      "example": "00000000-0000-0000-0000-000000000000",
+                      "readOnly": true,
+                      "type": "string"
+                    },
+                    "login_method": {
+                      "description": "A specific type of login method.",
+                      "enum": [
+                        "standard",
+                        "google_oidc",
+                        "SAML"
+                      ],
+                      "type": "string",
+                      "x-enum-varnames": [
+                        "STANDARD",
+                        "GOOGLE_OIDC",
+                        "SAML"
+                      ]
+                    }
+                  },
+                  "type": "object"
+                },
+                "id": {
+                  "description": "ID of the org login method.",
+                  "type": "string"
+                },
+                "relationships": {
+                  "description": "Resources related to the org login method",
+                  "properties": {
+                    "org": {
+                      "description": "Relationship to an organization.",
+                      "properties": {
+                        "data": {
+                          "description": "Relationship to organization object.",
+                          "properties": {
+                            "id": {
+                              "description": "ID of the organization.",
+                              "example": "00000000-0000-0000-0000-000000000000",
+                              "type": "string"
+                            },
+                            "type": {
+                              "default": "orgs",
+                              "description": "Organizations resource type.",
+                              "enum": [
+                                "orgs"
+                              ],
+                              "example": "orgs",
+                              "type": "string",
+                              "x-enum-varnames": [
+                                "ORGS"
+                              ]
+                            }
+                          },
+                          "required": [
+                            "id",
+                            "type"
+                          ],
+                          "type": "object"
+                        }
+                      },
+                      "required": [
+                        "data"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": {
+                  "default": "org_login_methods",
+                  "description": "Org login methods resource type.",
+                  "enum": [
+                    "org_login_methods"
+                  ],
+                  "example": "org_login_methods",
+                  "type": "string",
+                  "x-enum-varnames": [
+                    "ORG_LOGIN_METHODS"
+                  ]
+                }
+              },
+              "type": "object"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "OrgLoginMethodsType": {
+        "default": "org_login_methods",
+        "description": "Org login methods resource type.",
+        "enum": [
+          "org_login_methods"
+        ],
+        "example": "org_login_methods",
+        "type": "string",
+        "x-enum-varnames": [
+          "ORG_LOGIN_METHODS"
+        ]
       },
       "Organization": {
         "description": "Organization object.",
@@ -20030,6 +20553,634 @@
         "type": "string",
         "x-enum-varnames": [
           "USER_INVITATIONS"
+        ]
+      },
+      "UserLoginMethod": {
+        "description": "A user login method.",
+        "properties": {
+          "attributes": {
+            "description": "Attributes of a login method.",
+            "properties": {
+              "created_at": {
+                "description": "Creation date of the login method.",
+                "example": "2020-11-23T10:00:00.000Z",
+                "readOnly": true,
+                "type": "string"
+              },
+              "created_by": {
+                "description": "User who created this login method.",
+                "example": "00000000-0000-0000-0000-000000000000",
+                "readOnly": true,
+                "type": "string"
+              },
+              "login_method": {
+                "description": "A specific type of login method.",
+                "enum": [
+                  "standard",
+                  "google_oidc",
+                  "SAML"
+                ],
+                "type": "string",
+                "x-enum-varnames": [
+                  "STANDARD",
+                  "GOOGLE_OIDC",
+                  "SAML"
+                ]
+              }
+            },
+            "type": "object"
+          },
+          "id": {
+            "description": "ID of the user login method.",
+            "type": "string"
+          },
+          "relationships": {
+            "description": "Resources related to the user login method",
+            "properties": {
+              "org": {
+                "description": "Relationship to an organization.",
+                "properties": {
+                  "data": {
+                    "description": "Relationship to organization object.",
+                    "properties": {
+                      "id": {
+                        "description": "ID of the organization.",
+                        "example": "00000000-0000-0000-0000-000000000000",
+                        "type": "string"
+                      },
+                      "type": {
+                        "default": "orgs",
+                        "description": "Organizations resource type.",
+                        "enum": [
+                          "orgs"
+                        ],
+                        "example": "orgs",
+                        "type": "string",
+                        "x-enum-varnames": [
+                          "ORGS"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "type"
+                    ],
+                    "type": "object"
+                  }
+                },
+                "required": [
+                  "data"
+                ],
+                "type": "object"
+              },
+              "user": {
+                "description": "Relationship to user.",
+                "properties": {
+                  "data": {
+                    "description": "Relationship to user object.",
+                    "properties": {
+                      "id": {
+                        "description": "A unique identifier that represents the user.",
+                        "example": "00000000-0000-0000-0000-000000000000",
+                        "type": "string"
+                      },
+                      "type": {
+                        "default": "users",
+                        "description": "Users resource type.",
+                        "enum": [
+                          "users"
+                        ],
+                        "example": "users",
+                        "type": "string",
+                        "x-enum-varnames": [
+                          "USERS"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "type"
+                    ],
+                    "type": "object"
+                  }
+                },
+                "required": [
+                  "data"
+                ],
+                "type": "object"
+              }
+            },
+            "type": "object"
+          },
+          "type": {
+            "default": "user_login_methods",
+            "description": "User login methods resource type.",
+            "enum": [
+              "user_login_methods"
+            ],
+            "example": "user_login_methods",
+            "type": "string",
+            "x-enum-varnames": [
+              "USER_LOGIN_METHODS"
+            ]
+          }
+        },
+        "type": "object"
+      },
+      "UserLoginMethodCreateData": {
+        "description": "Object data used to create a user login method.",
+        "properties": {
+          "attributes": {
+            "description": "Attributes used to create an org login method.",
+            "properties": {
+              "login_method": {
+                "description": "A specific type of login method.",
+                "enum": [
+                  "standard",
+                  "google_oidc",
+                  "SAML"
+                ],
+                "type": "string",
+                "x-enum-varnames": [
+                  "STANDARD",
+                  "GOOGLE_OIDC",
+                  "SAML"
+                ]
+              }
+            },
+            "type": "object"
+          },
+          "relationships": {
+            "description": "Relationship to user.",
+            "properties": {
+              "data": {
+                "description": "Relationship to user object.",
+                "properties": {
+                  "id": {
+                    "description": "A unique identifier that represents the user.",
+                    "example": "00000000-0000-0000-0000-000000000000",
+                    "type": "string"
+                  },
+                  "type": {
+                    "default": "users",
+                    "description": "Users resource type.",
+                    "enum": [
+                      "users"
+                    ],
+                    "example": "users",
+                    "type": "string",
+                    "x-enum-varnames": [
+                      "USERS"
+                    ]
+                  }
+                },
+                "required": [
+                  "id",
+                  "type"
+                ],
+                "type": "object"
+              }
+            },
+            "required": [
+              "data"
+            ],
+            "type": "object"
+          },
+          "type": {
+            "default": "user_login_methods",
+            "description": "User login methods resource type.",
+            "enum": [
+              "user_login_methods"
+            ],
+            "example": "user_login_methods",
+            "type": "string",
+            "x-enum-varnames": [
+              "USER_LOGIN_METHODS"
+            ]
+          }
+        },
+        "required": [
+          "attributes",
+          "type"
+        ],
+        "type": "object"
+      },
+      "UserLoginMethodCreateRequest": {
+        "description": "Request used to create a user login method",
+        "properties": {
+          "data": {
+            "description": "Object data used to create a user login method.",
+            "properties": {
+              "attributes": {
+                "description": "Attributes used to create an org login method.",
+                "properties": {
+                  "login_method": {
+                    "description": "A specific type of login method.",
+                    "enum": [
+                      "standard",
+                      "google_oidc",
+                      "SAML"
+                    ],
+                    "type": "string",
+                    "x-enum-varnames": [
+                      "STANDARD",
+                      "GOOGLE_OIDC",
+                      "SAML"
+                    ]
+                  }
+                },
+                "type": "object"
+              },
+              "relationships": {
+                "description": "Relationship to user.",
+                "properties": {
+                  "data": {
+                    "description": "Relationship to user object.",
+                    "properties": {
+                      "id": {
+                        "description": "A unique identifier that represents the user.",
+                        "example": "00000000-0000-0000-0000-000000000000",
+                        "type": "string"
+                      },
+                      "type": {
+                        "default": "users",
+                        "description": "Users resource type.",
+                        "enum": [
+                          "users"
+                        ],
+                        "example": "users",
+                        "type": "string",
+                        "x-enum-varnames": [
+                          "USERS"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "type"
+                    ],
+                    "type": "object"
+                  }
+                },
+                "required": [
+                  "data"
+                ],
+                "type": "object"
+              },
+              "type": {
+                "default": "user_login_methods",
+                "description": "User login methods resource type.",
+                "enum": [
+                  "user_login_methods"
+                ],
+                "example": "user_login_methods",
+                "type": "string",
+                "x-enum-varnames": [
+                  "USER_LOGIN_METHODS"
+                ]
+              }
+            },
+            "required": [
+              "attributes",
+              "type"
+            ],
+            "type": "object"
+          }
+        },
+        "type": "object"
+      },
+      "UserLoginMethodRelationships": {
+        "description": "Resources related to the user login method",
+        "properties": {
+          "org": {
+            "description": "Relationship to an organization.",
+            "properties": {
+              "data": {
+                "description": "Relationship to organization object.",
+                "properties": {
+                  "id": {
+                    "description": "ID of the organization.",
+                    "example": "00000000-0000-0000-0000-000000000000",
+                    "type": "string"
+                  },
+                  "type": {
+                    "default": "orgs",
+                    "description": "Organizations resource type.",
+                    "enum": [
+                      "orgs"
+                    ],
+                    "example": "orgs",
+                    "type": "string",
+                    "x-enum-varnames": [
+                      "ORGS"
+                    ]
+                  }
+                },
+                "required": [
+                  "id",
+                  "type"
+                ],
+                "type": "object"
+              }
+            },
+            "required": [
+              "data"
+            ],
+            "type": "object"
+          },
+          "user": {
+            "description": "Relationship to user.",
+            "properties": {
+              "data": {
+                "description": "Relationship to user object.",
+                "properties": {
+                  "id": {
+                    "description": "A unique identifier that represents the user.",
+                    "example": "00000000-0000-0000-0000-000000000000",
+                    "type": "string"
+                  },
+                  "type": {
+                    "default": "users",
+                    "description": "Users resource type.",
+                    "enum": [
+                      "users"
+                    ],
+                    "example": "users",
+                    "type": "string",
+                    "x-enum-varnames": [
+                      "USERS"
+                    ]
+                  }
+                },
+                "required": [
+                  "id",
+                  "type"
+                ],
+                "type": "object"
+              }
+            },
+            "required": [
+              "data"
+            ],
+            "type": "object"
+          }
+        },
+        "type": "object"
+      },
+      "UserLoginMethodResponse": {
+        "description": "Response for retrieving a user login method.",
+        "properties": {
+          "data": {
+            "description": "An org login method.",
+            "properties": {
+              "attributes": {
+                "description": "Attributes of a login method.",
+                "properties": {
+                  "created_at": {
+                    "description": "Creation date of the login method.",
+                    "example": "2020-11-23T10:00:00.000Z",
+                    "readOnly": true,
+                    "type": "string"
+                  },
+                  "created_by": {
+                    "description": "User who created this login method.",
+                    "example": "00000000-0000-0000-0000-000000000000",
+                    "readOnly": true,
+                    "type": "string"
+                  },
+                  "login_method": {
+                    "description": "A specific type of login method.",
+                    "enum": [
+                      "standard",
+                      "google_oidc",
+                      "SAML"
+                    ],
+                    "type": "string",
+                    "x-enum-varnames": [
+                      "STANDARD",
+                      "GOOGLE_OIDC",
+                      "SAML"
+                    ]
+                  }
+                },
+                "type": "object"
+              },
+              "id": {
+                "description": "ID of the org login method.",
+                "type": "string"
+              },
+              "relationships": {
+                "description": "Resources related to the org login method",
+                "properties": {
+                  "org": {
+                    "description": "Relationship to an organization.",
+                    "properties": {
+                      "data": {
+                        "description": "Relationship to organization object.",
+                        "properties": {
+                          "id": {
+                            "description": "ID of the organization.",
+                            "example": "00000000-0000-0000-0000-000000000000",
+                            "type": "string"
+                          },
+                          "type": {
+                            "default": "orgs",
+                            "description": "Organizations resource type.",
+                            "enum": [
+                              "orgs"
+                            ],
+                            "example": "orgs",
+                            "type": "string",
+                            "x-enum-varnames": [
+                              "ORGS"
+                            ]
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "type"
+                        ],
+                        "type": "object"
+                      }
+                    },
+                    "required": [
+                      "data"
+                    ],
+                    "type": "object"
+                  }
+                },
+                "type": "object"
+              },
+              "type": {
+                "default": "org_login_methods",
+                "description": "Org login methods resource type.",
+                "enum": [
+                  "org_login_methods"
+                ],
+                "example": "org_login_methods",
+                "type": "string",
+                "x-enum-varnames": [
+                  "ORG_LOGIN_METHODS"
+                ]
+              }
+            },
+            "type": "object"
+          }
+        },
+        "type": "object"
+      },
+      "UserLoginMethodsResponse": {
+        "description": "Response for a list of user login methods.",
+        "properties": {
+          "data": {
+            "description": "Array of user login methods.",
+            "items": {
+              "description": "A user login method.",
+              "properties": {
+                "attributes": {
+                  "description": "Attributes of a login method.",
+                  "properties": {
+                    "created_at": {
+                      "description": "Creation date of the login method.",
+                      "example": "2020-11-23T10:00:00.000Z",
+                      "readOnly": true,
+                      "type": "string"
+                    },
+                    "created_by": {
+                      "description": "User who created this login method.",
+                      "example": "00000000-0000-0000-0000-000000000000",
+                      "readOnly": true,
+                      "type": "string"
+                    },
+                    "login_method": {
+                      "description": "A specific type of login method.",
+                      "enum": [
+                        "standard",
+                        "google_oidc",
+                        "SAML"
+                      ],
+                      "type": "string",
+                      "x-enum-varnames": [
+                        "STANDARD",
+                        "GOOGLE_OIDC",
+                        "SAML"
+                      ]
+                    }
+                  },
+                  "type": "object"
+                },
+                "id": {
+                  "description": "ID of the user login method.",
+                  "type": "string"
+                },
+                "relationships": {
+                  "description": "Resources related to the user login method",
+                  "properties": {
+                    "org": {
+                      "description": "Relationship to an organization.",
+                      "properties": {
+                        "data": {
+                          "description": "Relationship to organization object.",
+                          "properties": {
+                            "id": {
+                              "description": "ID of the organization.",
+                              "example": "00000000-0000-0000-0000-000000000000",
+                              "type": "string"
+                            },
+                            "type": {
+                              "default": "orgs",
+                              "description": "Organizations resource type.",
+                              "enum": [
+                                "orgs"
+                              ],
+                              "example": "orgs",
+                              "type": "string",
+                              "x-enum-varnames": [
+                                "ORGS"
+                              ]
+                            }
+                          },
+                          "required": [
+                            "id",
+                            "type"
+                          ],
+                          "type": "object"
+                        }
+                      },
+                      "required": [
+                        "data"
+                      ],
+                      "type": "object"
+                    },
+                    "user": {
+                      "description": "Relationship to user.",
+                      "properties": {
+                        "data": {
+                          "description": "Relationship to user object.",
+                          "properties": {
+                            "id": {
+                              "description": "A unique identifier that represents the user.",
+                              "example": "00000000-0000-0000-0000-000000000000",
+                              "type": "string"
+                            },
+                            "type": {
+                              "default": "users",
+                              "description": "Users resource type.",
+                              "enum": [
+                                "users"
+                              ],
+                              "example": "users",
+                              "type": "string",
+                              "x-enum-varnames": [
+                                "USERS"
+                              ]
+                            }
+                          },
+                          "required": [
+                            "id",
+                            "type"
+                          ],
+                          "type": "object"
+                        }
+                      },
+                      "required": [
+                        "data"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": {
+                  "default": "user_login_methods",
+                  "description": "User login methods resource type.",
+                  "enum": [
+                    "user_login_methods"
+                  ],
+                  "example": "user_login_methods",
+                  "type": "string",
+                  "x-enum-varnames": [
+                    "USER_LOGIN_METHODS"
+                  ]
+                }
+              },
+              "type": "object"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "UserLoginMethodsType": {
+        "default": "user_login_methods",
+        "description": "User login methods resource type.",
+        "enum": [
+          "user_login_methods"
+        ],
+        "example": "user_login_methods",
+        "type": "string",
+        "x-enum-varnames": [
+          "USER_LOGIN_METHODS"
         ]
       },
       "UserRelationships": {
@@ -35188,6 +36339,516 @@
         "x-unstable": "**Note**: This endpoint is in public beta.\nIf you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/)."
       }
     },
+    "/api/v2/org_login_methods": {
+      "get": {
+        "description": "Get all login methods for current org",
+        "operationId": "ListOrgLoginMethods",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Response for a list of org login methods.",
+                  "properties": {
+                    "data": {
+                      "description": "Array of org login methods.",
+                      "items": {
+                        "description": "An org login method.",
+                        "properties": {
+                          "attributes": {
+                            "description": "Attributes of a login method.",
+                            "properties": {
+                              "created_at": {
+                                "description": "Creation date of the login method.",
+                                "example": "2020-11-23T10:00:00.000Z",
+                                "readOnly": true,
+                                "type": "string"
+                              },
+                              "created_by": {
+                                "description": "User who created this login method.",
+                                "example": "00000000-0000-0000-0000-000000000000",
+                                "readOnly": true,
+                                "type": "string"
+                              },
+                              "login_method": {
+                                "description": "A specific type of login method.",
+                                "enum": [
+                                  "standard",
+                                  "google_oidc",
+                                  "SAML"
+                                ],
+                                "type": "string",
+                                "x-enum-varnames": [
+                                  "STANDARD",
+                                  "GOOGLE_OIDC",
+                                  "SAML"
+                                ]
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "id": {
+                            "description": "ID of the org login method.",
+                            "type": "string"
+                          },
+                          "relationships": {
+                            "description": "Resources related to the org login method",
+                            "properties": {
+                              "org": {
+                                "description": "Relationship to an organization.",
+                                "properties": {
+                                  "data": {
+                                    "description": "Relationship to organization object.",
+                                    "properties": {
+                                      "id": {
+                                        "description": "ID of the organization.",
+                                        "example": "00000000-0000-0000-0000-000000000000",
+                                        "type": "string"
+                                      },
+                                      "type": {
+                                        "default": "orgs",
+                                        "description": "Organizations resource type.",
+                                        "enum": [
+                                          "orgs"
+                                        ],
+                                        "example": "orgs",
+                                        "type": "string",
+                                        "x-enum-varnames": [
+                                          "ORGS"
+                                        ]
+                                      }
+                                    },
+                                    "required": [
+                                      "id",
+                                      "type"
+                                    ],
+                                    "type": "object"
+                                  }
+                                },
+                                "required": [
+                                  "data"
+                                ],
+                                "type": "object"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "type": {
+                            "default": "org_login_methods",
+                            "description": "Org login methods resource type.",
+                            "enum": [
+                              "org_login_methods"
+                            ],
+                            "example": "org_login_methods",
+                            "type": "string",
+                            "x-enum-varnames": [
+                              "ORG_LOGIN_METHODS"
+                            ]
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Not Found"
+          }
+        },
+        "summary": "Get all login methods for current org",
+        "tags": [
+          "Login Methods"
+        ],
+        "x-undo": {
+          "type": "safe"
+        }
+      },
+      "post": {
+        "description": "Create a login method for the current org.",
+        "operationId": "CreateOrgLoginMethod",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "Request used to create an org login method",
+                "properties": {
+                  "data": {
+                    "description": "Object used to create an org login method.",
+                    "properties": {
+                      "attributes": {
+                        "description": "Attributes used to create an org login method.",
+                        "properties": {
+                          "login_method": {
+                            "description": "A specific type of login method.",
+                            "enum": [
+                              "standard",
+                              "google_oidc",
+                              "SAML"
+                            ],
+                            "type": "string",
+                            "x-enum-varnames": [
+                              "STANDARD",
+                              "GOOGLE_OIDC",
+                              "SAML"
+                            ]
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": {
+                        "default": "org_login_methods",
+                        "description": "Org login methods resource type.",
+                        "enum": [
+                          "org_login_methods"
+                        ],
+                        "example": "org_login_methods",
+                        "type": "string",
+                        "x-enum-varnames": [
+                          "ORG_LOGIN_METHODS"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "attributes",
+                      "type"
+                    ],
+                    "type": "object"
+                  }
+                },
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Response for retrieving an org login method.",
+                  "properties": {
+                    "data": {
+                      "description": "An org login method.",
+                      "properties": {
+                        "attributes": {
+                          "description": "Attributes of a login method.",
+                          "properties": {
+                            "created_at": {
+                              "description": "Creation date of the login method.",
+                              "example": "2020-11-23T10:00:00.000Z",
+                              "readOnly": true,
+                              "type": "string"
+                            },
+                            "created_by": {
+                              "description": "User who created this login method.",
+                              "example": "00000000-0000-0000-0000-000000000000",
+                              "readOnly": true,
+                              "type": "string"
+                            },
+                            "login_method": {
+                              "description": "A specific type of login method.",
+                              "enum": [
+                                "standard",
+                                "google_oidc",
+                                "SAML"
+                              ],
+                              "type": "string",
+                              "x-enum-varnames": [
+                                "STANDARD",
+                                "GOOGLE_OIDC",
+                                "SAML"
+                              ]
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "id": {
+                          "description": "ID of the org login method.",
+                          "type": "string"
+                        },
+                        "relationships": {
+                          "description": "Resources related to the org login method",
+                          "properties": {
+                            "org": {
+                              "description": "Relationship to an organization.",
+                              "properties": {
+                                "data": {
+                                  "description": "Relationship to organization object.",
+                                  "properties": {
+                                    "id": {
+                                      "description": "ID of the organization.",
+                                      "example": "00000000-0000-0000-0000-000000000000",
+                                      "type": "string"
+                                    },
+                                    "type": {
+                                      "default": "orgs",
+                                      "description": "Organizations resource type.",
+                                      "enum": [
+                                        "orgs"
+                                      ],
+                                      "example": "orgs",
+                                      "type": "string",
+                                      "x-enum-varnames": [
+                                        "ORGS"
+                                      ]
+                                    }
+                                  },
+                                  "required": [
+                                    "id",
+                                    "type"
+                                  ],
+                                  "type": "object"
+                                }
+                              },
+                              "required": [
+                                "data"
+                              ],
+                              "type": "object"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "type": {
+                          "default": "org_login_methods",
+                          "description": "Org login methods resource type.",
+                          "enum": [
+                            "org_login_methods"
+                          ],
+                          "example": "org_login_methods",
+                          "type": "string",
+                          "x-enum-varnames": [
+                            "ORG_LOGIN_METHODS"
+                          ]
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Created"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Forbidden"
+          }
+        },
+        "summary": "Create a login method for the current org",
+        "tags": [
+          "Login Methods"
+        ],
+        "x-codegen-request-body-name": "body",
+        "x-undo": {
+          "type": "unsafe"
+        }
+      }
+    },
+    "/api/v2/org_login_methods/{login_method_id}": {
+      "delete": {
+        "description": "Delete the given user login method.",
+        "operationId": "DeleteOrgLoginMethod",
+        "parameters": [
+          {
+            "description": "The ID of the login method",
+            "in": "path",
+            "name": "login_method_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Not Found"
+          }
+        },
+        "summary": "Delete an org login method for the current org",
+        "tags": [
+          "Login Methods"
+        ],
+        "x-undo": {
+          "type": "idempotent"
+        }
+      }
+    },
     "/api/v2/permissions": {
       "get": {
         "description": "Returns a list of all permissions, including name, description, and ID.",
@@ -46832,6 +48493,588 @@
         }
       }
     },
+    "/api/v2/user_login_methods": {
+      "get": {
+        "description": "Get all of the given user's login methods.",
+        "operationId": "ListUserLoginMethods",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Response for a list of user login methods.",
+                  "properties": {
+                    "data": {
+                      "description": "Array of user login methods.",
+                      "items": {
+                        "description": "A user login method.",
+                        "properties": {
+                          "attributes": {
+                            "description": "Attributes of a login method.",
+                            "properties": {
+                              "created_at": {
+                                "description": "Creation date of the login method.",
+                                "example": "2020-11-23T10:00:00.000Z",
+                                "readOnly": true,
+                                "type": "string"
+                              },
+                              "created_by": {
+                                "description": "User who created this login method.",
+                                "example": "00000000-0000-0000-0000-000000000000",
+                                "readOnly": true,
+                                "type": "string"
+                              },
+                              "login_method": {
+                                "description": "A specific type of login method.",
+                                "enum": [
+                                  "standard",
+                                  "google_oidc",
+                                  "SAML"
+                                ],
+                                "type": "string",
+                                "x-enum-varnames": [
+                                  "STANDARD",
+                                  "GOOGLE_OIDC",
+                                  "SAML"
+                                ]
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "id": {
+                            "description": "ID of the user login method.",
+                            "type": "string"
+                          },
+                          "relationships": {
+                            "description": "Resources related to the user login method",
+                            "properties": {
+                              "org": {
+                                "description": "Relationship to an organization.",
+                                "properties": {
+                                  "data": {
+                                    "description": "Relationship to organization object.",
+                                    "properties": {
+                                      "id": {
+                                        "description": "ID of the organization.",
+                                        "example": "00000000-0000-0000-0000-000000000000",
+                                        "type": "string"
+                                      },
+                                      "type": {
+                                        "default": "orgs",
+                                        "description": "Organizations resource type.",
+                                        "enum": [
+                                          "orgs"
+                                        ],
+                                        "example": "orgs",
+                                        "type": "string",
+                                        "x-enum-varnames": [
+                                          "ORGS"
+                                        ]
+                                      }
+                                    },
+                                    "required": [
+                                      "id",
+                                      "type"
+                                    ],
+                                    "type": "object"
+                                  }
+                                },
+                                "required": [
+                                  "data"
+                                ],
+                                "type": "object"
+                              },
+                              "user": {
+                                "description": "Relationship to user.",
+                                "properties": {
+                                  "data": {
+                                    "description": "Relationship to user object.",
+                                    "properties": {
+                                      "id": {
+                                        "description": "A unique identifier that represents the user.",
+                                        "example": "00000000-0000-0000-0000-000000000000",
+                                        "type": "string"
+                                      },
+                                      "type": {
+                                        "default": "users",
+                                        "description": "Users resource type.",
+                                        "enum": [
+                                          "users"
+                                        ],
+                                        "example": "users",
+                                        "type": "string",
+                                        "x-enum-varnames": [
+                                          "USERS"
+                                        ]
+                                      }
+                                    },
+                                    "required": [
+                                      "id",
+                                      "type"
+                                    ],
+                                    "type": "object"
+                                  }
+                                },
+                                "required": [
+                                  "data"
+                                ],
+                                "type": "object"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "type": {
+                            "default": "user_login_methods",
+                            "description": "User login methods resource type.",
+                            "enum": [
+                              "user_login_methods"
+                            ],
+                            "example": "user_login_methods",
+                            "type": "string",
+                            "x-enum-varnames": [
+                              "USER_LOGIN_METHODS"
+                            ]
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Not Found"
+          }
+        },
+        "summary": "Get all of the given user's login methods",
+        "tags": [
+          "Login Methods"
+        ],
+        "x-undo": {
+          "type": "safe"
+        }
+      },
+      "post": {
+        "description": "Create a login method for the given user.",
+        "operationId": "CreateUserLoginMethod",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "Request used to create a user login method",
+                "properties": {
+                  "data": {
+                    "description": "Object data used to create a user login method.",
+                    "properties": {
+                      "attributes": {
+                        "description": "Attributes used to create an org login method.",
+                        "properties": {
+                          "login_method": {
+                            "description": "A specific type of login method.",
+                            "enum": [
+                              "standard",
+                              "google_oidc",
+                              "SAML"
+                            ],
+                            "type": "string",
+                            "x-enum-varnames": [
+                              "STANDARD",
+                              "GOOGLE_OIDC",
+                              "SAML"
+                            ]
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "relationships": {
+                        "description": "Relationship to user.",
+                        "properties": {
+                          "data": {
+                            "description": "Relationship to user object.",
+                            "properties": {
+                              "id": {
+                                "description": "A unique identifier that represents the user.",
+                                "example": "00000000-0000-0000-0000-000000000000",
+                                "type": "string"
+                              },
+                              "type": {
+                                "default": "users",
+                                "description": "Users resource type.",
+                                "enum": [
+                                  "users"
+                                ],
+                                "example": "users",
+                                "type": "string",
+                                "x-enum-varnames": [
+                                  "USERS"
+                                ]
+                              }
+                            },
+                            "required": [
+                              "id",
+                              "type"
+                            ],
+                            "type": "object"
+                          }
+                        },
+                        "required": [
+                          "data"
+                        ],
+                        "type": "object"
+                      },
+                      "type": {
+                        "default": "user_login_methods",
+                        "description": "User login methods resource type.",
+                        "enum": [
+                          "user_login_methods"
+                        ],
+                        "example": "user_login_methods",
+                        "type": "string",
+                        "x-enum-varnames": [
+                          "USER_LOGIN_METHODS"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "attributes",
+                      "type"
+                    ],
+                    "type": "object"
+                  }
+                },
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Response for retrieving a user login method.",
+                  "properties": {
+                    "data": {
+                      "description": "An org login method.",
+                      "properties": {
+                        "attributes": {
+                          "description": "Attributes of a login method.",
+                          "properties": {
+                            "created_at": {
+                              "description": "Creation date of the login method.",
+                              "example": "2020-11-23T10:00:00.000Z",
+                              "readOnly": true,
+                              "type": "string"
+                            },
+                            "created_by": {
+                              "description": "User who created this login method.",
+                              "example": "00000000-0000-0000-0000-000000000000",
+                              "readOnly": true,
+                              "type": "string"
+                            },
+                            "login_method": {
+                              "description": "A specific type of login method.",
+                              "enum": [
+                                "standard",
+                                "google_oidc",
+                                "SAML"
+                              ],
+                              "type": "string",
+                              "x-enum-varnames": [
+                                "STANDARD",
+                                "GOOGLE_OIDC",
+                                "SAML"
+                              ]
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "id": {
+                          "description": "ID of the org login method.",
+                          "type": "string"
+                        },
+                        "relationships": {
+                          "description": "Resources related to the org login method",
+                          "properties": {
+                            "org": {
+                              "description": "Relationship to an organization.",
+                              "properties": {
+                                "data": {
+                                  "description": "Relationship to organization object.",
+                                  "properties": {
+                                    "id": {
+                                      "description": "ID of the organization.",
+                                      "example": "00000000-0000-0000-0000-000000000000",
+                                      "type": "string"
+                                    },
+                                    "type": {
+                                      "default": "orgs",
+                                      "description": "Organizations resource type.",
+                                      "enum": [
+                                        "orgs"
+                                      ],
+                                      "example": "orgs",
+                                      "type": "string",
+                                      "x-enum-varnames": [
+                                        "ORGS"
+                                      ]
+                                    }
+                                  },
+                                  "required": [
+                                    "id",
+                                    "type"
+                                  ],
+                                  "type": "object"
+                                }
+                              },
+                              "required": [
+                                "data"
+                              ],
+                              "type": "object"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "type": {
+                          "default": "org_login_methods",
+                          "description": "Org login methods resource type.",
+                          "enum": [
+                            "org_login_methods"
+                          ],
+                          "example": "org_login_methods",
+                          "type": "string",
+                          "x-enum-varnames": [
+                            "ORG_LOGIN_METHODS"
+                          ]
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Created"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Forbidden"
+          }
+        },
+        "summary": "Create a login method for the given user",
+        "tags": [
+          "Login Methods"
+        ],
+        "x-codegen-request-body-name": "body",
+        "x-undo": {
+          "type": "unsafe"
+        }
+      }
+    },
+    "/api/v2/user_login_methods/{login_method_id}": {
+      "delete": {
+        "description": "Delete the given user login method.",
+        "operationId": "DeleteUserLoginMethod",
+        "parameters": [
+          {
+            "description": "The ID of the login method",
+            "in": "path",
+            "name": "login_method_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Not Found"
+          }
+        },
+        "summary": "Delete the given user login method",
+        "tags": [
+          "Login Methods"
+        ],
+        "x-undo": {
+          "type": "idempotent"
+        }
+      }
+    },
     "/api/v2/users": {
       "get": {
         "description": "Get the list of all users in the organization. This list includes\nall users even if they are deactivated or unverified.",
@@ -50107,6 +52350,10 @@
         "url": "https://docs.datadoghq.com/account_management/api-app-keys/"
       },
       "name": "Key Management"
+    },
+    {
+      "description": "The Login Methods API is used to create and manage login method access to Datadog.",
+      "name": "Login Methods"
     },
     {
       "description": "Archives forward all the logs ingested to a cloud storage system.\n\nSee the [Archives Page](https://app.datadoghq.com/logs/pipelines/archives)\nfor a list of the archives currently configured in our UI.",

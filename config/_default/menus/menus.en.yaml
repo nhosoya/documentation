@@ -2598,6 +2598,10 @@ api_v1:
     parent: Key Management
     url: '#edit-an-application-key'
     generated: true
+  - name: Login Methods
+    url: /api/v1/login-methods/
+    identifier: Login Methods
+    generated: true
   - name: Logs
     url: /api/v1/logs/
     identifier: Logs
@@ -3447,6 +3451,34 @@ api_v2:
   - name: Edit an application key owned by current user
     parent: Key Management
     url: '#edit-an-application-key-owned-by-current-user'
+    generated: true
+  - name: Login Methods
+    url: /api/v2/login-methods/
+    identifier: Login Methods
+    generated: true
+  - name: Get all login methods for current org
+    parent: Login Methods
+    url: '#get-all-login-methods-for-current-org'
+    generated: true
+  - name: Create a login method for the current org
+    parent: Login Methods
+    url: '#create-a-login-method-for-the-current-org'
+    generated: true
+  - name: Delete an org login method for the current org
+    parent: Login Methods
+    url: '#delete-an-org-login-method-for-the-current-org'
+    generated: true
+  - name: Get all of the given user's login methods
+    parent: Login Methods
+    url: '#get-all-of-the-given-users-login-methods'
+    generated: true
+  - name: Create a login method for the given user
+    parent: Login Methods
+    url: '#create-a-login-method-for-the-given-user'
+    generated: true
+  - name: Delete the given user login method
+    parent: Login Methods
+    url: '#delete-the-given-user-login-method'
     generated: true
   - name: Logs
     url: /api/v2/logs/

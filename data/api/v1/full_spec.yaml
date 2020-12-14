@@ -19770,6 +19770,8 @@ tags:
     description: Find out more at
     url: https://docs.datadoghq.com/account_management/api-app-keys/
   name: Key Management
+- description: '[Check API version 2](/api/v2/login_methods/).'
+  name: Login Methods
 - description: 'Send your logs to your Datadog platform over HTTP. Limits per HTTP
     request are:
 

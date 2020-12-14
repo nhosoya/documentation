@@ -63,6 +63,10 @@
     "name": "Key Management",
     "description": "Manage your Datadog API and application keys.\nYou need an API and application key with admin rights\nto interact with this endpoint. The full list of keys can be seen on your\n[Datadog API page](https://app.datadoghq.com/account/settings#api)."
   },
+  "login-methods": {
+    "name": "Login Methods",
+    "description": "The Login Methods API is used to create and manage login method access to Datadog."
+  },
   "logs": {
     "name": "Logs",
     "description": "Search your logs in the Datadog platform over HTTP.\n\n[See API version 1](/api/v1/logs/) for sending logs."
